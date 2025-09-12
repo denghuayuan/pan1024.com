@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>查看 admin.js 源码</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 16px;
+      background: #f8f8f8;
+      color: #333;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    #code-container {
+      background: #282c34;
+      color: #abb2bf;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .loading {
+      color: #7f8c8d;
+    }
+    .error {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>📄 admin.js 源码内容</h1>
+  <div id="code-container" class="loading">正在加载代码，请稍候...</div>
+
+  <script>
+    const codeContainer = document.getElementById('code-container');
+
+    fetch('./assets/admin.js')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP错误！状态码：${response.status}`);
+        }
+        return response.text();
+      })
+      .then(text => {
+        codeContainer.textContent = text;
+        codeContainer.classList.remove('loading');
+      })
+      .catch(err => {
+        codeContainer.innerHTML = `<span class="error">❌ 加载失败：${err.message}</span>`;
+        codeContainer.classList.remove('loading');
+      });
+  </script>
+</body>
+</html>
